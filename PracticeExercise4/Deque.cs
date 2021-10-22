@@ -8,7 +8,7 @@ namespace PracticeExercise4
         private LinkedList<T> linkedList;
         public Deque()
         {
-            linkedList = new LinkedList<T>;
+            linkedList = new LinkedList<T>();
         }
 
         public bool IsEmpty => linkedList.Count == 0;
@@ -31,6 +31,8 @@ namespace PracticeExercise4
 
         public T RemoveBack()
         {
+            if (IsEmpty)
+                throw new EmptyQueueException();
             T lastItem = linkedList.Last.Value;
             linkedList.RemoveLast();
             return lastItem;
@@ -38,9 +40,30 @@ namespace PracticeExercise4
 
         public T RemoveFront()
         {
+            if (IsEmpty)
+                throw new EmptyQueueException();
             T firstItem = linkedList.First.Value;
-            linkedList.RemoveLast();
+            linkedList.RemoveFirst();
             return firstItem;
+        }
+        public override string ToString()
+        {
+            string result =  "<Back> ";
+
+            var currentNode = linkedList.Last;
+            while (currentNode != null)
+            {
+                result += currentNode.Value;
+                if(currentNode.Previous != null)
+                {
+                    result += " → ";
+                }
+                currentNode = currentNode.Previous;
+            }
+
+            result += " <Front>";
+
+            return result;
         }
     }
 }
