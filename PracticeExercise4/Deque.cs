@@ -15,9 +15,39 @@ namespace PracticeExercise4
 
         public int Length => linkedList.Count;
 
-        public T Front => linkedList.First.Value;
+        public T Front 
+        {
+            get
+            {
+                T front;
+                try
+                {
+                    front = linkedList.First.Value;
+                }
+                catch (NullReferenceException)
+                {
+                    throw new EmptyQueueException();
+                }
+                return front;
+            }
+        }
 
-        public T Back => linkedList.Last.Value;
+        public T Back
+        {
+            get
+            {
+                T back;
+                try
+                {
+                    back = linkedList.Last.Value;
+                }
+                catch (NullReferenceException)
+                {
+                    throw new EmptyQueueException();
+                }
+                return back;
+            }
+        }
 
         public void AddBack(T item)
         {
